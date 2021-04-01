@@ -1,6 +1,6 @@
 const style = `
 .filter-container{
-  margin-bottom: 35px;
+  margin-bottom: 25px;
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
