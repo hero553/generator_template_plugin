@@ -29,7 +29,7 @@ class MainViewTemplate {
       if (item.isSearchOptions) {
         return `
             <div class="filter-item">
-              <el-select v-model="listQuery.${item.name}" placeholder="${item.text}" style="width:300px">
+              <el-select v-model="listQuery.${item.name}" placeholder="请选择${item.text}" style="width:300px">
                 <el-option
                   v-for="item in optiosConfig"
                   :key="item.value"
