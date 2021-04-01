@@ -4,7 +4,7 @@ const style = `
   display: flex;
   margin-top: 20px;
   .filter-item{
-      margin-left: 55px;
+      margin-left: 60px;
       &:first-child{
         margin-left: 0;
       }
