@@ -14,13 +14,13 @@ class AddViewTemplate {
     }
   }
   initialsUpper(filed) {
-    return filed.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())
+    return filed.slice(0,1).toLocaleUpperCase()+filed.slice(1)
   }
   getButtonContext() {
     return `
       <el-form-item class="el-form-botton">
         <div>
-          <el-button type="info" @click="cancelSave${this.initialsUpper(this.fileName)}()">
+          <el-button type="info" @click="cancel${this.initialsUpper(this.fileName)}()">
             取消
           </el-button>
         </div>
@@ -195,7 +195,9 @@ import { validateRules } from './${this.fileName}.helper.js'
         return {
           loading: false,
           isUpdate: false,
-          ${this.generatorUploadKey()}
+          ${
+            this.hasUploadImage()?this.generatorUploadKey()+",":''
+          }
           ruleForm:{
             ${this.getFormItemModel()}
           },
@@ -219,6 +221,9 @@ ${
           if (isUpdate) {
             this.isUpdate = isUpdate
           }
+        },
+        cancel${this.initialsUpper(this.fileName)}(){
+          this.$Router.back()
         },
         ${this.getUploadMethods().length===1?this.getUploadMethods().replace(/,/,''):this.getUploadMethods()}
         ${this.generatorSaveValidate()}

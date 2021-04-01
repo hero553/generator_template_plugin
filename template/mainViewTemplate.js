@@ -18,7 +18,7 @@ class MainViewTemplate {
       <div class="filter-container">
         ${this._getSearchContext()}
         <div class="filter-item">
-          <el-button type="primary" @click="onSearch${this.initialsUpper(this.fileName)}Handle">查询</el-button>
+          <el-button type="primary" @click="get${this.initialsUpper(this.fileName)}sHandle">查询</el-button>
         </div>
       </div>
     `
@@ -45,12 +45,18 @@ class MainViewTemplate {
             </div>
           `
       }
-    }).join('\n      ')
+    }).join('\n      ')+`
+    ${this.getButtonContext()}
+    `
   }
   getButtonContext() {
     return `
       <div class="filter-item">
-        <el-button @click="add${this.initialsUpper(this.fileName)}Handle">新增</el-button>
+        <el-button @click="add${this.initialsUpper(this.fileName)}Handle"           
+          type="primary"
+          class="filter-item"
+          icon="el-icon-plus"
+        >新增</el-button>
       </div>
     `
   }
@@ -96,13 +102,12 @@ class MainViewTemplate {
     return this.component.model.filter(item => item.isSearch === true || item.isSearchOptions).map(item => `${item.name}:""`).join(',\n          ')
   }
   initialsUpper(filed) {
-    return filed.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())
+    return filed.slice(0,1).toLocaleUpperCase()+filed.slice(1)
   }
 
   getTemplate() {
     return `<template>
     ${this.getSearchContext()}
-      ${this.getButtonContext()}
       <el-table
         v-loading="listLoading"
         :data="${this.fileName}ListData"
@@ -173,6 +178,9 @@ import Pagination from '@/components/Pagination'
           }
         })
       },
+      delete${this.initialsUpper(this.fileName)}Handle(params){
+        // pass
+      }
     }
   }
 </script>
