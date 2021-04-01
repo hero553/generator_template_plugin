@@ -1,0 +1,11 @@
+{
+  "name": "generator_template_plugin",
+  "version": "1.0.0",
+  "description": "element generator crud",
+  "main": "generator-template-plugin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "阿阔",
+  "license": "ISC"
+}
