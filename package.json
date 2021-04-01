@@ -1,6 +1,6 @@
 {
   "name": "generator_template_plugin",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "element generator crud",
   "main": "generator-template-plugin.js",
   "scripts": {

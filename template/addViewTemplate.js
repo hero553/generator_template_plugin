@@ -62,7 +62,7 @@ class AddViewTemplate {
       } else if (item.isSearchOptions) {
         return `
         <el-form-item label="${item.text}" prop="${item.name}">
-          <el-select v-model="listQuery.${item.name}" placeholder="请选择" style="width:300px">
+          <el-select v-model="ruleForm.${item.name}" placeholder="请选择${item.name}" style="width:300px">
             <el-option
               v-for="item in optiosConfig"
               :key="item.value"
@@ -76,11 +76,11 @@ class AddViewTemplate {
         return `
           <el-form-item label="${item.text}" prop="${item.name}">
             <el-input
-                  v-model="ruleForm.${item.name}"
-                  placeholder="请填写${item.text}"
-                  style="width:300px"
-                  maxlength="50"
-                  type="text"
+                v-model="ruleForm.${item.name}"
+                placeholder="请填写${item.text}"
+                style="width:300px"
+                maxlength="50"
+                type="text"
             />
           </el-form-item>
         `

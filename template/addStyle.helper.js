@@ -5,7 +5,7 @@ const addStyle = `
         display: flex;
     }
     .save-button{
-        margin-left: 150px;
+        margin-left: 170px;
     }
 }
 `

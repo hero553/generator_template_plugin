@@ -17,9 +17,9 @@ class MainViewTemplate {
     <div class="app-container">
       <div class="filter-container">
         ${this._getSearchContext()}
-        <el-form-item class="el-form-search-button-item">
+        <div class="filter-item">
           <el-button type="primary" @click="onSearch${this.initialsUpper(this.fileName)}Handle">查询</el-button>
-        </el-form-item>
+        </div>
       </div>
     `
   }
@@ -27,8 +27,8 @@ class MainViewTemplate {
     return this.component.model.map(item => {
       if (item.isSearchOptions) {
         return `
-            <el-form-item label="${item.text}" prop="${item.name}">
-              <el-select v-model="listQuery.${item.name}" placeholder="请选择" style="width:300px">
+            <div class="filter-item">
+              <el-select v-model="listQuery.${item.name}" placeholder="请选择${item.name}" style="width:300px">
                 <el-option
                   v-for="item in optiosConfig"
                   :key="item.value"
@@ -36,22 +36,23 @@ class MainViewTemplate {
                   :value="item.value"
                 />
               </el-select>
-            </el-form-item>
+            </div>
           `
       } else if (item.isSearch) {
         return `
-            <el-form-item label="${item.text}">
-              <el-input v-model="listQuery.${item.name}" class="filter-item" type="primary" ></el-input>
-            </el-form-item>
+            <div class="filter-item">
+              <el-input v-model="listQuery.${item.name}" placeholder="请输入${item.name}" class="filter-item" type="primary" ></el-input>
+            </div>
           `
       }
     }).join('\n      ')
   }
   getButtonContext() {
     return `
-    <div>
-      <el-button @click="add${this.initialsUpper(this.fileName)}Handle">新增</el-button>
-    </div>`
+      <div class="filter-item">
+        <el-button @click="add${this.initialsUpper(this.fileName)}Handle">新增</el-button>
+      </div>
+    `
   }
 
   getColumnsContext() {
@@ -113,10 +114,10 @@ class MainViewTemplate {
         ${this.getColumnsContext()}
         <el-table-column label="操作" align="center" fixed="right">
           <template slot-scope="{row}">
-            <el-button type="warning" size="mini" @click="update${this.initialsUpper(this.fileName)}(row)">
+            <el-button type="warning" size="mini" @click="update${this.initialsUpper(this.fileName)}Handle(row)">
               修改
             </el-button>
-            <el-button type="danger" size="mini" @click="delete${this.initialsUpper(this.fileName)}(row)">
+            <el-button type="danger" size="mini" @click="delete${this.initialsUpper(this.fileName)}Handle(row)">
               删除
             </el-button>
           </template>
@@ -127,7 +128,7 @@ class MainViewTemplate {
       :total="totalPage"
       :page.sync="listQuery.pageNo"
       :limit.sync="listQuery.pageSize"
-      @pagination="get${this.initialsUpper(this.fileName)}s"
+      @pagination="get${this.initialsUpper(this.fileName)}sHandle"
     />
     </div>
 </template>
@@ -151,20 +152,20 @@ import Pagination from '@/components/Pagination'
       }
     },
     created(){
-      this.get${this.initialsUpper(this.fileName)}s()
+      this.get${this.initialsUpper(this.fileName)}sHandle()
     },
     methods:{
-      async get${this.initialsUpper(this.fileName)}s(params) {
+      async get${this.initialsUpper(this.fileName)}sHandle(params) {
         const { result: { records, total }} = await get${this.initialsUpper(this.fileName)}sImpl({ ...this.listQuery, ...params })
         this.${this.fileName}ListData = records || []
         this.totalPage = total
       },
-      add${this.initialsUpper(this.fileName)}() {
+      add${this.initialsUpper(this.fileName)}Handle() {
         this.$router.push({
           name: 'Add${this.initialsUpper(this.fileName)}'
         })
       },
-      update${this.initialsUpper(this.fileName)}(params) {
+      update${this.initialsUpper(this.fileName)}Handle(params) {
         this.$router.push({
           name: 'Update${this.initialsUpper(this.fileName)}',
           params: {
