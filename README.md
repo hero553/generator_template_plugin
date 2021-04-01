@@ -1,5 +1,5 @@
 #### npm安装方式
-`npm i generator-template-plugin`
+`npm i generator_template_plugin`
 
 #### generator_template_plugin
 webpack添加插件处加入（先导入插件）：
