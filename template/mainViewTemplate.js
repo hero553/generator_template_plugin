@@ -18,7 +18,7 @@ class MainViewTemplate {
       <div class="filter-container">
         ${this._getSearchContext()}
         <div class="filter-item">
-          <el-button type="primary" @click="get${this.initialsUpper(this.fileName)}sHandle">查询</el-button>
+          <el-button type="primary" @click="search${this.initialsUpper(this.fileName)}Handle">查询</el-button>
         </div>
         ${this.getButtonContext()}
       </div>
@@ -163,6 +163,9 @@ import Pagination from '@/components/Pagination'
         const { result: { records, total }} = await get${this.initialsUpper(this.fileName)}sImpl({ ...this.listQuery, ...params })
         this.${this.fileName}ListData = records || []
         this.totalPage = total
+      },
+      search${this.initialsUpper(this.fileName)}Handle(){
+        this.get${this.initialsUpper(this.fileName)}sHandle()
       },
       add${this.initialsUpper(this.fileName)}Handle() {
         this.$router.push({
